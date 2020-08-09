@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>GSoC 2020: CRIU</title>
+
+		<link href="https://fonts.googleapis.com/css2?family=Recursive:wght@200;300;400&display=swap" rel="stylesheet">
+
+		<style>
+			html * {font-family: 'Recursive', sans-serif; font-weight: bolder;}
+			h1 {margin-left: 25%; color: #f2f2f2;}
+			h2 {margin-left: 25%; color: #f2f2f2;}
+			h3 {margin-left: 25%; color: #f2f2f2;}
+			body {background-color: #1c1c1c;}
+			p {margin-left: 25%; width: 50%; font-weight: normal; color: #f2f2f2;}
+			div {
+				margin-left: 25%;
+				width: 720px;
+				padding: 10px;
+				border: 5px solid grey;
+			}
+			table, th, td {
+				border: 1px solid grey;
+				border-collapse: collapse;
+			}
+			th {color: #f2f2f2;}
+			td {font-size: 15px; font-weight: normal; color: #f2f2f2;}
+			a:link {color: #6489d1;}
+			a:visited {color: #6489d1;}
+			a:hover {color: #3864ba;}
+			a:active {color: #3864ba;}
+		</style>
+	</head>
+
+	<body>
+		<h2>Google Summer of Code 2020</h2>
+		<h1>Restrict Checks for Open/MMAPed Files</h1>
+		<p style="font-size:16px; margin-left:25%; font-weight: bold;">May 2020 to August 2020</p>
+
+		<p></p>
+
+		<div>
+			<p style="margin-left:2%"><b>Name: </b>Ajay Bharadwaj</p>
+			<p style="margin-left:2%"><b>Organization: </b><a href="https://www.criu.org/Main_Page">CRIU</a></p>
+			<p style="margin-left:2%"><b>Mentors: </b>Andrei Vagin, Dmitry Safonov</p>
+			<p style="margin-left:2%; width: 58%"><b>Official Documentation: </b><a href="">Validating files on restore</a></p>
+			<p style="margin-left:2%; width: 58%"><a href="https://summerofcode.withgoogle.com/projects/#5773537320632320">GSoC Project Page</a></p>
+		</div>
+
+		<h2>About the Project</h2>
+		<p>
+			While checkpointing, CRIU stores some meta-information about the file and this is validated while restoring to make sure
+			the right file is being restored (This is especially necessary for ELF files since there is a risk of restoring executables or
+			libraries of a different version). Previously, the only meta-information stored was the file size, which meant that the validation
+			wasn't very strong. The goal of this project was to extend this meta-information to include the build-ID of the file (ELF files only)
+			and the CRC32C checksum of the file. Currently, the file size check is used only as a preliminary test, after which, either the
+			build-ID or the checksum method is used.
+		</p>
+		<p>
+			The build-ID is a "strongly unique embedded identifier" that (If present) is stored in a particular note section of ELF files.
+			The build-ID method is much less intensive compared to the checksum method while still being a much stronger check than simply
+			comparing the file size and therefore CRIU uses this method wherever possible by default. The checksum method is used a fallback when
+			the build-ID cannot be obtained.
+		</p>
+		<p>
+			CRC32C checksum is a slight variation of the better known CRC32C checksum. The only difference is the polynomial being used.
+			CRC32C uses the Castagnoli polynomial (0x82F63B78 in little-endian notation) and CRC32 uses 0xEDB88320 (In little-endian notation).
+			CRC32C is used since it is supported by the hardware in newer Intel CPUs. The checksum is calculated on the required bytes depending on
+			the configuration set - Entire file, First N bytes of the file, or Every Nth byte of the file. Here, N is the checksum parameter.
+		</p>
+		<p>
+			To explicitly use the checksum method for the entire file:
+			<br>
+			&emsp;&emsp; <i><b>criu ... --file-validation checksum-full</b></i>
+			<br>
+			To explicitly use the checksum method for the first 2048 bytes of the file:
+			<br>
+			&emsp;&emsp; <i><b>criu ... --file-validation checksum --checksum-parameter 2048</b></i>
+			<br>
+			To explicitly use the checksum method for every 2048th byte of the file:
+			<br>
+			&emsp;&emsp; <i><b>criu ... --file-validation checksum-period --checksum-parameter 2048</b></i>
+		</p>
+		<p>
+			To explicitly use only the filesize method:
+			<br>
+			&emsp;&emsp; <i><b>criu ... --file-validation filesize</b></i>
+		</p>
+
+		<h2>List of Commits</h2>
+		<table style="width:50%; margin-left:27%">
+			<tr align="center">
+				<th>Commit Number</th>
+				<th>Commit Name</th>
+				<th>Status</th>
+			</tr>
+
+ 			<tr align="center">
+				<td>Commit 1/10</td>
+				<td><a href="https://github.com/checkpoint-restore/criu/commit/770bbae6573647889a662a33cd8fd6b7be56c0db">Add additional fields to RegFileEntry</a></td>
+				<td>Accepted</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 2/10</td>
+				<td><a href="https://github.com/checkpoint-restore/criu/commit/6d81a7001a5ddf86c63a8a9e21d569e7c547eb63">Add build-ID validation functionality</a></td>
+				<td>Accepted</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 3/10</td>
+				<td><a href="https://github.com/checkpoint-restore/criu/commit/90bc4590b65425fa6abab2f8fb63c96bae5acb32">Add CLI option for build-ID</a></td>
+				<td>Accepted</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 4/10</td>
+				<td><a href="https://github.com/checkpoint-restore/criu/commit/1eeb21583af7b6084f2a5c7b460887fb9e55eac8">First fixup commit for build-ID validation</a></td>
+				<td>Accepted</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 5/10</td>
+				<td><a href="https://github.com/checkpoint-restore/criu/commit/3d273435ef5c0d9dbdd682bd0b17ec5c67fa0c7c">Second fixup commit for build-ID validation</a></td>
+				<td>Accepted</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 6/10</td>
+				<td><a href="">Add CLI option for checksum</a></td>
+				<td>Pushed</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 7/10</td>
+				<td><a href="">Add checksum validation functionality</a></td>
+				<td>Pushed</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 8/10</td>
+				<td><a href="">Add crfail-restore flag to ZDTM</a></td>
+				<td>Pushed</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 9/10</td>
+				<td><a href="">Add build-ID tests to ZDTM</a></td>
+				<td>Pushed</td>
+			</tr>
+
+			<tr align="center">
+				<td>Commit 10/10</td>
+				<td><a href="">Add checksum tests to ZDTM</a></td>
+				<td>Pushed</td>
+			</tr>
+		</table>
+
+		<h2>Performance Impact</h2>
+		<p>
+			The values shown below are the average times it took to finish the ZDTM tests over multiple runs, and are only to indicate the impact each
+			method has in general.
+		</p>
+		<p><i>zdtm/transition/shmem:</i></p>
+		<table style="width:35%; margin-left:27%;">
+ 			<tr align="center">
+				<td>File Size</td>
+				<td>3.782s</td>
+			</tr>
+
+			<tr align="center">
+				<td>Build-ID</td>
+				<td>4.153s (~9% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (First 1024 bytes)</td>
+				<td>4.465s (~18% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (Entire File)</td>
+				<td>4.722s (~24% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (Every 1024th byte)</td>
+				<td>4.498s (~19% increase)</td>
+			</tr>
+		</table>
+		<p><i>zdtm/static/maps04:</i></p>
+		<table style="width:40%; margin-left:27%">
+ 			<tr align="center">
+				<td>File Size</td>
+				<td>35.317s</td>
+			</tr>
+
+			<tr align="center">
+				<td>Build-ID</td>
+				<td>35.720s (~1% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (First 1024 bytes)</td>
+				<td>35.919s (~2% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (Entire File)</td>
+				<td>36.679s (~4% increase)</td>
+			</tr>
+			
+			<tr align="center">
+				<td>Checksum (Every 1024th byte)</td>
+				<td>36.476s (~3% increase)</td>
+			</tr>
+		</table>
+
+		<h2>Improvements and Future Work</h2>
+		<p>Calculating the CRC32C checksum can be made faster by using a lookup table.</p>
+
+		<h2>Acknowledgements</h2>
+		<p>
+			I am immensely grateful to my mentors Andrei and Dmitry and the rest of the community as well for their guidance and
+			feedback throughout the project. It was a wonderful oppurtunity to work with the CRIU community and I had a great time
+			working on this project. I am extremely enthusiastic about continuing to contribute to CRIU.
+		</p>
+	</body>
+</html>
