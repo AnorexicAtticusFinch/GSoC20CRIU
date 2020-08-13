@@ -161,6 +161,10 @@
 			The values shown below are the average times it took to finish the ZDTM tests over multiple runs, and are only to indicate the impact each
 			method has in general.
 		</p>
+		<p>
+			Each test has 3 files and each test is run 3 times (In Host, Namespace and User Namespace). For each file the checksum/build-ID is obtained twice
+			(During dump and restore) therefore the function to find checksum/build-ID is called 18 times overall per test.
+		</p>
 		<p>For reference, these tests were run on tmpfs (To remove any disk latency) and on an undervolted i5 4800H.</p>
 		<p><i>zdtm/transition/shmem:</i></p>
 		<p>&emsp;&emsp; 3 files of size: 0.09 MB, 2 MB and 0.17 MB approximately</p>
