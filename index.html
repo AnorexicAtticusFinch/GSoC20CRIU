@@ -44,7 +44,7 @@
 			<p style="margin-left:2%"><b>Organization: </b><a href="https://www.criu.org/Main_Page">CRIU</a></p>
 			<p style="margin-left:2%"><b>Mentors: </b>Andrei Vagin, Dmitry Safonov</p>
 			<p style="margin-left:2%; width: 58%"><b>Official Documentation: </b><a href="https://www.criu.org/Validate_files_on_restore">Validating files on restore</a></p>
-			<p style="margin-left:2%; width: 58%"><a href="https://summerofcode.withgoogle.com/projects/#5773537320632320">GSoC Project Page</a></p>
+			<p style="margin-left:2%; width: 58%"><a href="https://summerofcode.withgoogle.com/archive/2020/projects/4858949725061120/">GSoC Project Page</a></p>
 		</div>
 
 		<h2>About the Project</h2>
@@ -92,67 +92,56 @@
 			<tr align="center">
 				<th>Commit Number</th>
 				<th>Commit Name</th>
-				<th>Status</th>
 			</tr>
 
  			<tr align="center">
 				<td>Commit 1/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1123/commits/0141ce2dfcbc5f2a3e3e0bacbfec8e5f7be5671b">Add additional fields to RegFileEntry</a></td>
-				<td>Accepted</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 2/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1123/commits/de668a0eb46727461c9ba893e08ee75ed10b8bb5">Add build-ID validation functionality</a></td>
-				<td>Accepted</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 3/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1123/commits/3cd2a78989c26c4600b41bb6b10b3b3b67a7f91b">Add CLI option for build-ID</a></td>
-				<td>Accepted</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 4/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1151/commits/6def90a9b5ed131d1e5e81fb7dca4b851c3fc905">First fixup commit for build-ID validation</a></td>
-				<td>Accepted</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 5/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1151/commits/b9daa0a71a829020636cb1d942f66f75029d05a3">Second fixup commit for build-ID validation</a></td>
-				<td>Accepted</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 6/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1148/commits">Add CLI option for checksum</a></td>
-				<td>Pushed</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 7/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1148/commits">Add checksum validation functionality</a></td>
-				<td>Pushed</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 8/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1148/commits">Add crfail-restore flag to ZDTM</a></td>
-				<td>Pushed</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 9/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1148/commits">Add build-ID tests to ZDTM</a></td>
-				<td>Pushed</td>
 			</tr>
 
 			<tr align="center">
 				<td>Commit 10/10</td>
 				<td><a href="https://github.com/checkpoint-restore/criu/pull/1148/commits">Add checksum tests to ZDTM</a></td>
-				<td>Pushed</td>
 			</tr>
 		</table>
 
@@ -165,7 +154,7 @@
 			Each test has 3 files and each test is run 3 times (In Host, Namespace and User Namespace). For each file the checksum/build-ID is obtained twice
 			(During dump and restore) therefore the function to find checksum/build-ID is called 18 times overall per test.
 		</p>
-		<p>For reference, these tests were run on tmpfs (To remove any disk latency) and on an undervolted i5 4800H.</p>
+		<p>For reference, these tests were run on tmpfs (To remove any disk latency) and on an undervolted i5 8300H.</p>
 		<p><i>zdtm/transition/shmem:</i></p>
 		<p>&emsp;&emsp; 3 files of size: 0.09 MB, 2 MB and 0.17 MB approximately</p>
 		<table style="width:35%; margin-left:27%;">
