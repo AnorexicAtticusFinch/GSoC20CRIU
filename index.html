@@ -13,8 +13,8 @@
 			h3 {margin-left: 25%; color: #f2f2f2;}
 			body {background-color: #1c1c1c;}
 			p {margin-left: 25%; width: 50%; font-weight: normal; color: #f2f2f2;}
-			ol {margin-left: 25%; width: 50%; font-weight: normal; color: #f2f2f2; margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0;}
-			li {width: 100%; font-weight: normal; color: #f2f2f2; margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0;}
+			ol {margin-left: 20%; width: 50%; font-weight: normal; color: #f2f2f2; margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0;}
+			li {margin-left: 5%; width: 100%; font-weight: normal; color: #f2f2f2; margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0;}
 			div {
 				margin-left: 25%;
 				width: 48%;
@@ -93,7 +93,7 @@
 			test is expected to fail during restore. A total of 10 automated tests have been added to test the new features.
 		</p>
 		<p>
-			<ol style="margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0">
+			<ol>
 				4 tests have been added to test the build-ID method (2 each for 32-bit and 64-bit ELF files).
 				The build-ID is altered after dump and before restore, causing the restore to fail in all 4 tests:
 
@@ -104,7 +104,7 @@
 			</ol>
 		</p>
 		<p>
-			<ol style="margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0">
+			<ol>
 				6 tests have been added to test the checksum method:
 
 				<li>The last byte of the file is altered after dump and before restore, causing restore to fail.
