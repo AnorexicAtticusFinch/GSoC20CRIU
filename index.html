@@ -92,33 +92,33 @@
 			<br><br>
 			4 tests have been added to test the build-ID method (2 each for 32-bit and 64-bit ELF files):
 			<br>
-			1. 32-bit ELF file has only 1 PT_NOTE header.
+			&emsp;&emsp; 1. 32-bit ELF file has only 1 PT_NOTE header.
 			<br>
-			2. 64-bit ELF file has only 1 PT_NOTE header.
+			&emsp;&emsp; 2. 64-bit ELF file has only 1 PT_NOTE header.
 			<br>
-			3. 32-bit ELF file has 2 PT_NOTE headers and the build-ID is present in the 2nd header.
+			&emsp;&emsp; 3. 32-bit ELF file has 2 PT_NOTE headers and the build-ID is present in the 2nd header.
 			<br>
-			4. 64-bit ELF file has 2 PT_NOTE headers and the build-ID is present in the 2nd header.
+			&emsp;&emsp; 4. 64-bit ELF file has 2 PT_NOTE headers and the build-ID is present in the 2nd header.
 			<br>
 			The build-ID is altered after dump and before restore, causing the restore to fail in all 4 tests.
 			<br><br>
 			6 tests have been added to test the checksum method:
 			<br>
-			1. The last byte of the file is altered after dump and before restore, causing restore to fail
+			&emsp;&emsp; 1. The last byte of the file is altered after dump and before restore, causing restore to fail
 			<br>
-			&emsp;&emsp; <i><b>checksum-full</b></i>
+			&emsp;&emsp;&emsp;&emsp; <i><b>checksum-full</b></i>
 			<br>
-			2. <i><b>checksum, checksum-parameter = 10485800</b></i> (First 10485800 bytes are checksummed)
+			&emsp;&emsp; 2. <i><b>checksum, checksum-parameter = 10485800</b></i> (First 10485800 bytes are checksummed)
 			<br>
-			3. <i><b>checksum-period, checksum-parameter = 10485800</b></i> (Every 10485800th byte is checksummed)
+			&emsp;&emsp; 3. <i><b>checksum-period, checksum-parameter = 10485800</b></i> (Every 10485800th byte is checksummed)
 			<br>
-			4. <i><b>checksum, checksum-parameter = 10485700</b></i> (First 10485700 bytes are checksummed)
+			&emsp;&emsp; 4. <i><b>checksum, checksum-parameter = 10485700</b></i> (First 10485700 bytes are checksummed)
 			<br>
-			5. <i><b>checksum-period, checksum-parameter = 10485700</b></i> (Every 10485700th byte is checksummed)
+			&emsp;&emsp; 5. <i><b>checksum-period, checksum-parameter = 10485700</b></i> (Every 10485700th byte is checksummed)
 			<br>
-			6. The last byte of a file of size 10485800 bytes is altered after dump and before restore, causing restore to fail.
+			&emsp;&emsp; 6. The last byte of a file of size 10485800 bytes is altered after dump and before restore, causing restore to fail.
 			<br>
-			&emsp;&emsp; <i><b>checksum, checksum-parameter = 10485800</b></i> (First 10485800 bytes are checksummed)
+			&emsp;&emsp;&emsp;&emsp; <i><b>checksum, checksum-parameter = 10485800</b></i> (First 10485800 bytes are checksummed)
 		</p>
 
 		<h2>List of Commits</h2>
