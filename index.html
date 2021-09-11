@@ -93,9 +93,10 @@
 			test is expected to fail during restore. A total of 10 automated tests have been added to test the new features.
 		</p>
 		<p>
-			4 tests have been added to test the build-ID method (2 each for 32-bit and 64-bit ELF files).
-			The build-ID is altered after dump and before restore, causing the restore to fail in all 4 tests:
 			<ol style="margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0">
+				4 tests have been added to test the build-ID method (2 each for 32-bit and 64-bit ELF files).
+				The build-ID is altered after dump and before restore, causing the restore to fail in all 4 tests:
+
 				<li>32-bit ELF file has only 1 PT_NOTE header.</li>
 				<li>64-bit ELF file has only 1 PT_NOTE header.</li>
 				<li>32-bit ELF file has 2 PT_NOTE headers and the build-ID is present in the 2nd header.</li>
@@ -103,8 +104,9 @@
 			</ol>
 		</p>
 		<p>
-			6 tests have been added to test the checksum method:
 			<ol style="margin-top:0; padding-top:0; margin-bottom:0; padding-bottom:0">
+				6 tests have been added to test the checksum method:
+
 				<li>The last byte of the file is altered after dump and before restore, causing restore to fail.
 					<br>&emsp;&emsp; <i><b>checksum-full</b></i>
 				</li>
